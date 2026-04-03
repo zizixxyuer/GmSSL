@@ -117,6 +117,7 @@ int sm9_do_encrypt(const SM9_ENC_MASTER_KEY *mpk, const char *id, size_t idlen,
 	}
 	gmssl_memxor(c2, K, in, inlen);
 
+	//GMT 0044.4-2016 C3 = MAC(K2 || C2); NOT HMAC(K2 || C2),change it?
 	//sm3_hmac(K + inlen, 32, c2, inlen, c3);
 	sm3_hmac_init(&hmac_ctx, K + inlen, SM3_HMAC_SIZE);
 	sm3_hmac_update(&hmac_ctx, c2, inlen);
